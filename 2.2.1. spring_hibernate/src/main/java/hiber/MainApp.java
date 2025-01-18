@@ -48,7 +48,8 @@ public class MainApp {
             System.out.println();
         }
 
-        System.out.println("User with the model and series of the car is " + userService.getUserCar("Model2", 2).toString());
+        System.out.println("User with the model and series of the car is " +
+                           userService.getUserCar("Model2", 2).toString());
 
         context.close();
     }

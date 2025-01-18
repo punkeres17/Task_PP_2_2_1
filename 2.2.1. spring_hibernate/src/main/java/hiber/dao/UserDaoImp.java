@@ -11,8 +11,13 @@ import java.util.List;
 @Repository
 public class UserDaoImp implements UserDao {
 
+
+    private final SessionFactory sessionFactory;
+
     @Autowired
-    private SessionFactory sessionFactory;
+    public UserDaoImp(final SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
 
     @Override
     public void add(final User user) {
@@ -23,7 +28,8 @@ public class UserDaoImp implements UserDao {
     @Override
     @SuppressWarnings("unchecked")
     public List<User> listUsers() {
-        final TypedQuery<User> query = sessionFactory.getCurrentSession().createQuery("from User");
+        final String hqlQuery = "from User u join fetch u.car";
+        final TypedQuery<User> query = sessionFactory.getCurrentSession().createQuery(hqlQuery);
         return query.getResultList();
     }
 
